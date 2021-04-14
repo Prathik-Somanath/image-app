@@ -1,3 +1,4 @@
+//All the stacks after loggin in
 import React, {useContext} from 'react';
 import {View, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';

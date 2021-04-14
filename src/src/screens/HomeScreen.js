@@ -1,21 +1,17 @@
-import React, {useContext, useState, useEffect} from 'react';
-import {ScrollView, View, Text, StyleSheet, FlatList} from 'react-native';
-import FormButton from '../components/FormButton';
-import Loading from '../components/Loading';
-import {AuthContext} from '../navigation/AuthProvider';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {windowHeight, windowWidth} from '../utils/Dimensions';
 import FeedFinishFooter from '../components/FeedFinishFooter';
 import axios from 'axios';
 
 export default function HomeScreen() {
-  const {user, logout} = useContext(AuthContext);
   const [images, setImages] = useState([]);
-  const [loaded, setIsLoaded] = useState(false);
   const [limitExceeded, setLimit] = useState(false);
   const [page, setPage] = useState(1);
   const query = 'Bike'; //search image query
 
+  // Function used to fetch 10 img per call
   const fetchImages = () => {
     console.log('fetching....');
     const apiRoot = 'https://api.unsplash.com';
@@ -29,7 +25,6 @@ export default function HomeScreen() {
         // console.log('img data received:', res.data);
         setPage(page + 1);
         setImages([...images, ...res.data.results]);
-        setIsLoaded(true);
       })
       .catch(err => {
         console.log(err);
