@@ -7,7 +7,7 @@ export default function FormInput({labelValue, placeholderText, ...rest}) {
     <TextInput
       value={labelValue}
       style={styles.input}
-      numberOfLines={1}
+      numberOfLines={2}
       placeholder={placeholderText}
       placeholderTextColor="#666"
       {...rest}
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderRadius: 8,
     borderWidth: 1,
+    color: 'black',
   },
 });

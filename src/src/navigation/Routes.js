@@ -14,6 +14,7 @@ export default function Routes() {
   // Handle user state changes
   function onAuthStateChanged(users) {
     setUser(users);
+    // console.log(users.uid);
     if (initializing) {
       setInitializing(false);
     }
