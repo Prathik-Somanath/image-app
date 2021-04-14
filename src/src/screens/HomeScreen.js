@@ -14,7 +14,7 @@ export default function HomeScreen() {
   const [loaded, setIsLoaded] = useState(false);
   const [limitExceeded, setLimit] = useState(false);
   const [page, setPage] = useState(1);
-  const query = 'dog'; //search image query
+  const query = 'Bike'; //search image query
 
   const fetchImages = () => {
     console.log('fetching....');

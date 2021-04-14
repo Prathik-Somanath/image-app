@@ -5,6 +5,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../navigation/AuthProvider';
 import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import EditProfileScreen from '../screens/EditProfileScreen';
+import Logout from '../components/Icon';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,13 +23,7 @@ function HomeScreenStack() {
           title: 'Image Gallery',
           headerTitleAlign: 'center',
           headerRight: () => (
-            <Ionicons
-              onPress={() => logout()}
-              name={'log-out-outline'}
-              size={22}
-              style={{paddingRight: 10}}
-              color={'gray'}
-            />
+            <Logout iconName={'log-out-outline'} onPress={() => logout()} />
           ),
         }}
       />
@@ -35,10 +32,32 @@ function HomeScreenStack() {
 }
 
 function ProfileScreenStack() {
+  const {user, logout} = useContext(AuthContext);
   return (
-    <View>
-      <Text>This is Profile</Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: 'Profile',
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <Logout iconName={'log-out-outline'} onPress={() => logout()} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          title: 'Edit Profile',
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <Logout iconName={'save'} onPress={() => logout()} />
+          ),
+        }}
+      />
+    </Stack.Navigator>
   );
 }
 
