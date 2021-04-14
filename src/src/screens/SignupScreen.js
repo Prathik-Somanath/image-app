@@ -36,6 +36,7 @@ export default function SignupScreen() {
         secureTextEntry={true}
       />
       <FormButton
+        disabled={email === '' || password === ''}
         buttonTitle="Signup"
         onPress={() => register(userName, email, password)}
       />

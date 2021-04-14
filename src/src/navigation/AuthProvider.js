@@ -1,4 +1,5 @@
 import React, {createContext, useState} from 'react';
+import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {AddUserData} from '../api/AddData';
 
@@ -16,6 +17,7 @@ export const AuthProvider = ({children}) => {
           try {
             await auth().signInWithEmailAndPassword(email, password);
           } catch (e) {
+            Alert.alert('Wrong Credentials');
             console.log(e);
           }
         },
@@ -28,6 +30,7 @@ export const AuthProvider = ({children}) => {
             console.log('res: ', res);
             AddUserData(res.user.uid, {name: userName});
           } catch (e) {
+            Alert.alert('Error signin up');
             console.log(e);
           }
         },
