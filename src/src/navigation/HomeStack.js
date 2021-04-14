@@ -12,7 +12,14 @@ const Tab = createBottomTabNavigator();
 function HomeScreenStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: 'Image Gallery',
+          headerTitleAlign: 'center',
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -35,7 +42,6 @@ export default function HomeStack() {
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Profile') {
-            // eslint-disable-next-line no-unused-vars
             iconName = focused ? 'person-circle' : 'person-circle-outline';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
