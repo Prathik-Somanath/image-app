@@ -7,7 +7,7 @@ export default function FormInput({labelValue, placeholderText, ...rest}) {
     <TextInput
       value={labelValue}
       style={styles.input}
-      numberOfLines={1}
+      numberOfLines={2}
       placeholder={placeholderText}
       placeholderTextColor="#666"
       {...rest}

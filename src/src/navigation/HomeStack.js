@@ -52,9 +52,9 @@ function ProfileScreenStack() {
         options={{
           title: 'Edit Profile',
           headerTitleAlign: 'center',
-          headerRight: () => (
-            <Logout iconName={'save'} onPress={() => logout()} />
-          ),
+          // headerRight: () => (
+          //   <Logout iconName={'save'} onPress={() => logout()} />
+          // ),
         }}
       />
     </Stack.Navigator>

@@ -133,6 +133,7 @@ android {
 
     defaultConfig {
         applicationId "com.src"
+        multiDexEnabled true
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -189,6 +190,7 @@ dependencies {
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:27.0.0')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'androidx.multidex:multidex:2.0.1' 
     
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion

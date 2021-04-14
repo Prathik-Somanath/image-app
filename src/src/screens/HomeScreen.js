@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     width: windowWidth - 44,
-    height: 300,
+    height: windowHeight / 2.5,
     backgroundColor: '#fff',
     borderRadius: 10,
     overflow: 'hidden',
@@ -108,6 +108,6 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     // width: windowWidth - 44,
-    height: 235,
+    height: windowHeight / 3.15,
   },
 });

@@ -1,27 +1,53 @@
-import React from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FormButton from '../components/FormButton';
+import firestore from '@react-native-firebase/firestore';
+import {AuthContext} from '../navigation/AuthProvider';
+// import {useIsFocused} from '@react-navigation/native';
 
 export default function ProfileScreen({navigation}) {
+  const {user} = useContext(AuthContext);
+  const [userDetails, setUserDetails] = useState(null);
+  const getUser = async () => {
+    const userData = await firestore().collection('users').doc(user.uid).get();
+    console.log('userDetails:', userData._data);
+    setUserDetails(userData._data);
+  };
+
+  useEffect(() => {
+    getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.header} />
       <Image
         style={styles.avatar}
-        source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}
+        source={{
+          uri:
+            'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/86.png',
+        }}
       />
       <View style={styles.body}>
         <View style={styles.bodyContent}>
-          <Text style={styles.name}>John Doe</Text>
-          <Text style={styles.info}>UX Designer / Mobile developer</Text>
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
-            electram expetendis, omittam deseruisse consequuntur ius an,
-          </Text>
+          {userDetails && <Text style={styles.name}>{userDetails.name}</Text>}
+          {userDetails && userDetails.bio ? (
+            <Text style={styles.bio}>{userDetails.bio}</Text>
+          ) : (
+            <Text style={styles.bio}>Empty Bio</Text>
+          )}
+          {userDetails && userDetails.desc ? (
+            <Text style={styles.description}>{userDetails.desc}</Text>
+          ) : (
+            <Text style={styles.description}>Empty Description</Text>
+          )}
           <FormButton
             buttonTitle="Edit"
-            onPress={() => navigation.navigate('EditProfile')}
+            onPress={() =>
+              navigation.navigate('EditProfile', {userDetails, getUser})
+            }
           />
         </View>
       </View>
@@ -57,7 +83,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 30,
   },
-  info: {
+  bio: {
     fontSize: 16,
     color: 'tomato',
     marginTop: 10,
